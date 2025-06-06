@@ -4,21 +4,14 @@ import pandas as pd
 # pyright: ignore[reportMissingImports]
 # Load data
 data = pd.read_csv("sea_levels_with_years.csv")
-#mapping = {
- #   "Change in mean sea level: Sea level: TOPEX.Poseidon" : "Poseidon",
-  #  "Change in mean sea level: Sea level: Jason.1" : "Jason.1",
-  #  "Change in mean sea level: Sea level: Jason.2" : "Jason.2",
-  #  "Change in mean sea level: Sea level: Jason.3" : "Jason:3",
-  #  "Change in mean sea level: Sea level: Sentinel-6MF" : "Sentinel-6MF",
-  #  "Change in mean sea level: Sea level: Trend" : "Trend"
-#}
-#data["Indicator"] = data["Indicator"].replace(mapping)
+
 
 # Sidebar
 st.sidebar.header("Choose a Region To View")
 #source = ["All"] + sorted(data["Indicator"].unique())
 region = ["All"] + sorted(data["Measure"].unique())
 
+st.sidebar.subheader("The first two charts are connected to the region selected and will display corresponding data.")
 #selected_source = st.sidebar.selectbox("Data Source", source)
 selected_region = st.sidebar.selectbox("Region", region)
 
@@ -32,7 +25,7 @@ filtered = data2.copy()
 if selected_region != "All":
     filtered = filtered[filtered["Measure"] == selected_region]
 
-
+st.header("All charts include tooltips that allow you to hover over data points for more information.")
 box = alt.Chart(filtered).mark_bar().encode(
     x=alt.X("Year:O"),
     y=alt.Y("Measure:N", title="Region"),
@@ -139,6 +132,7 @@ final_chart = (points + average_line).properties(
     title='Yearly Sea Level Changes and Annual Average'
 ).interactive()
 #st.altair_chart(final_chart, use_container_width=True)
+
 
 st.subheader("Pick a region from the top 10 most volatile sea regions. Then, scroll down and examine how their volatility compares to the yearly average of all sea regions each year.")
 st.altair_chart(volatile_chart & final_chart, use_container_width=True)
