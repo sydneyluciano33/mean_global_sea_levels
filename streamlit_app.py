@@ -6,7 +6,7 @@ import pandas as pd  # pyright: ignore[reportMissingImports]
 dataset = pd.read_csv('sea_levels_with_years.csv')
 
 st.set_page_config(layout="wide")
-with st.sidebar:
+with st.sidebar: 
     st.title("Sea Level Change Analysis")
     st.markdown("Explore sea level changes across different regions and years.")
     measure_options = ['All'] + dataset['Measure'].unique().tolist()

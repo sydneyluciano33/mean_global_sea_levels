@@ -3,7 +3,7 @@ import altair as alt
 import pandas as pd
 
 # Load data
-data = pd.read_excel("sea_levels_with_years (1).xlsx")
+data = pd.read_excel("sea_levels_with_years(1).xlsx")
 mapping = {
     "Change in mean sea level: Sea level: TOPEX.Poseidon" : "Poseidon",
     "Change in mean sea level: Sea level: Jason.1" : "Jason.1",
